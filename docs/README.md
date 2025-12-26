@@ -192,7 +192,7 @@
         + inputMajor(): void // 전공 과목 입력 받기
         + inputGE(): void // 교양 과목 입력 받기
         + inputCourseList(): void // inputMajor()와 inputGE()로 종합 입력받기
-        + validCredit(Course course, String condition1, String condition2): int
+        + validCredit(Course course, String condition): int
         // 학점 유효성 검사
         + calculateTC(): int
         + calculateGPA(): double
