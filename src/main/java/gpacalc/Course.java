@@ -65,6 +65,12 @@ public class Course {
         };
     }
 
+    // 과목성적가중치 계산기
+    public double calculateGradeWeighting() {
+        return grade2GradePoint()*credit;
+    }
+
+    // 성적 입력 유효성 확인
     public static boolean validGrade(String grade) {
         return switch (grade) {
             case "A+", "A0", "B+", "B0", "C+", "C0", "D+", "D0", "F", "P", "NP" -> true;
@@ -72,6 +78,7 @@ public class Course {
         };
     }
 
+    // 학점 입력 유효성 확인
     public static boolean validCredit(String credit) {
         return switch (credit) {
             case "1", "2", "3", "4" -> true;
@@ -79,6 +86,7 @@ public class Course {
         };
     }
 
+    // Course 생성기
     public static Course createCourse(String input) {
         String[] split = input.split("-");
 
@@ -87,10 +95,6 @@ public class Course {
         }
 
         return new Course(split[0], Integer.parseInt(split[1]), split[2]);
-    }
-
-    public double calculateGradeWeighting() {
-        return grade2GradePoint()*credit;
     }
 
 }

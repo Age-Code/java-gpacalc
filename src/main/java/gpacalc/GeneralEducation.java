@@ -1,10 +1,12 @@
 package gpacalc;
 
 public class GeneralEducation extends Course {
+    // 기본 생성자
     public GeneralEducation() {
         super();
     }
 
+    // Course 입력 생성자
     public GeneralEducation(Course course) {
         super(course.getCourseName(), course.getCredit(), course.getGrade());
     }

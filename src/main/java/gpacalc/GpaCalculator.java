@@ -5,8 +5,9 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 
 public class GpaCalculator {
-    ArrayList<Course> courseList;
+    ArrayList<Course> courseList; // 과목 목록
 
+    // 기본 생성자
     public GpaCalculator() {
         courseList = new ArrayList<>();
     }
@@ -26,12 +27,12 @@ public class GpaCalculator {
         System.out.println("교양 과목명과 이수학점, 평점을 입력해주세요(예시: 선형대수학-3-C0,인간관계와자기성장-3-P):");
         String input = Console.readLine();
         String[] GEList = input.split(",");
-        for(String major : GEList){
-            courseList.add(GeneralEducation.createGE(major));
+        for(String generalEducation : GEList){
+            courseList.add(GeneralEducation.createGE(generalEducation));
         }
     }
 
-    // 종합 입력받기
+    // inputMajor()와 inputGE()로 종합 입력받기
     public void inputCourseList() {
         inputMajor();
         System.out.println();
@@ -53,11 +54,6 @@ public class GpaCalculator {
 
         for(Course course : courseList){
             totalCredits += validCredit(course, "F");
-            /*
-            if(!(course.getGrade().equals("F") || course.getGrade().equals("NP"))){
-                totalCredits += course.getCredit();
-            }
-             */
         }
 
         return totalCredits;
@@ -71,11 +67,6 @@ public class GpaCalculator {
         for(Course course : courseList){
             gpa += course.getGradeWeighting();
             gradeCredits += validCredit(course, "P");
-            /*
-            if(!(course.getGrade().equals("P") || course.getGrade().equals("NP"))){
-                gradeCredits += course.getCredit();
-            }
-             */
         }
 
         return gpa/gradeCredits;
@@ -90,11 +81,6 @@ public class GpaCalculator {
             if(course instanceof Major){
                 MajorGPA += course.getGradeWeighting();
                 gradeCredits += validCredit(course, "P");
-                /*
-                if(!(course.getGrade().equals("P") || course.getGrade().equals("NP"))){
-                    gradeCredits += course.getCredit();
-                }
-                 */
             }
         }
 
