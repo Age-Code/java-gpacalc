@@ -39,11 +39,12 @@ public class GpaCalculator {
         System.out.println();
     }
 
-    public int validCredit(Course course, String condition1, String condition2) {
-        if(!(course.getGrade().equals(condition1) || course.getGrade().equals(condition2))){
-            return course.getCredit();
+    // 학점 유효성 검사
+    public int validCredit(Course course, String condition) {
+        if(course.getGrade().equals(condition) || course.getGrade().equals("NP")){
+            return 0;
         }
-        return 0;
+        return course.getCredit();
     }
 
     // 취득학점 계산기
@@ -51,7 +52,7 @@ public class GpaCalculator {
         int totalCredits = 0;
 
         for(Course course : courseList){
-            totalCredits += validCredit(course, "F", "NP");
+            totalCredits += validCredit(course, "F");
             /*
             if(!(course.getGrade().equals("F") || course.getGrade().equals("NP"))){
                 totalCredits += course.getCredit();
@@ -69,7 +70,7 @@ public class GpaCalculator {
 
         for(Course course : courseList){
             gpa += course.getGradeWeighting();
-            gradeCredits += validCredit(course, "P", "NP");
+            gradeCredits += validCredit(course, "P");
             /*
             if(!(course.getGrade().equals("P") || course.getGrade().equals("NP"))){
                 gradeCredits += course.getCredit();
@@ -88,7 +89,7 @@ public class GpaCalculator {
         for(Course course : courseList){
             if(course instanceof Major){
                 MajorGPA += course.getGradeWeighting();
-                gradeCredits += validCredit(course, "P", "NP");
+                gradeCredits += validCredit(course, "P");
                 /*
                 if(!(course.getGrade().equals("P") || course.getGrade().equals("NP"))){
                     gradeCredits += course.getCredit();
@@ -109,7 +110,7 @@ public class GpaCalculator {
             sb.append(course.toString() + "\n");
         }
 
-        sb.append("\n<취득학점>\n" + calculateTC() + "\n");
+        sb.append("\n<취득학점>\n" + calculateTC() + "학점\n");
         sb.append("\n<평점평균>\n" + String.format("%.2f", calculateGPA()) + " / 4.5\n");
         sb.append("\n<전공 평점평균>\n" + String.format("%.2f", calculateMajorGPA()) + " / 4.5\n");
 
