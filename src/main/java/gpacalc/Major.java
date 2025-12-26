@@ -5,19 +5,13 @@ public class Major extends Course{
         super();
     }
 
-    public Major(String courseName, int credit, String grade) {
-        super(courseName, credit, grade);
+    public Major(Course course) {
+        super(course.getCourseName(), course.getCredit(), course.getGrade());
     }
 
     // input 받고 Major 객체 리턴
     public static Major createMajor(String input) {
-        String[] split = input.split("-");
-
-        if(split.length != 3){
-            throw new IllegalArgumentException("잘못된 과목정보입니다.");
-        }
-
-        return new Major(split[0], Integer.parseInt(split[1]), split[2]);
+        return new Major(createCourse(input));
     }
 
     public String toString() {

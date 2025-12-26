@@ -65,6 +65,30 @@ public class Course {
         };
     }
 
+    public static boolean validGrade(String grade) {
+        return switch (grade) {
+            case "A+", "A0", "B+", "B0", "C+", "C0", "D+", "D0", "F", "P", "NP" -> true;
+            default -> throw new IllegalArgumentException("잘못된 성적 입력입니다.");
+        };
+    }
+
+    public static boolean validCredit(String credit) {
+        return switch (credit) {
+            case "1", "2", "3", "4" -> true;
+            default -> throw new IllegalArgumentException("잘못된 학점 입력입니다.");
+        };
+    }
+
+    public static Course createCourse(String input) {
+        String[] split = input.split("-");
+
+        if(!(split.length == 3 && validCredit(split[1]) && validGrade(split[2]))) {
+            throw new IllegalArgumentException("잘못된 과목정보입니다.");
+        }
+
+        return new Course(split[0], Integer.parseInt(split[1]), split[2]);
+    }
+
     public double calculateGradeWeighting() {
         return grade2GradePoint()*credit;
     }
